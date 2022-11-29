@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,9 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +32,12 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:3000/auth/login', {
       "username": this.credentials.username,
       "password": this.credentials.password
-    }).subscribe(console.log);
+    }).subscribe((res: {access_token: string}) => {
+      if(res.access_token) {
+        this.auth.accessToken = res.access_token;
+        this.router.navigate(['/home']);
+      }
+    }, console.log);
   }
 
 }
