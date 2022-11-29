@@ -13,6 +13,7 @@ export class AuthService {
   
 
   isAuthenticated(){
-    return this.accessToken !== undefined;
+    console.log(this.accessToken)
+    return this.accessToken !== null;
   }
 }
