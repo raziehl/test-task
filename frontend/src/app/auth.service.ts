@@ -7,4 +7,8 @@ export class AuthService {
   accessToken: string;
 
   constructor() { }
+
+  isAuthenticated(){
+    return this.accessToken !== undefined;
+  }
 }
