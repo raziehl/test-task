@@ -29,4 +29,12 @@ export class AppController {
   getProfile(@Request() req) {
     return req.user;
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('upload')
+  uploadFile(@Request() req) {
+    console.log(req);
+    return 'Successful Upload';
+  }
+
 }
