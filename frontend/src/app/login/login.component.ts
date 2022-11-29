@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     }).subscribe((res: {access_token: string}) => {
       if(res.access_token) {
         this.auth.accessToken = res.access_token;
+        localStorage.setItem('access-token', res.access_token);
         this.router.navigate(['/home']);
       }
     }, console.log);
