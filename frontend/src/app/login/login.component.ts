@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,17 +13,22 @@ export class LoginComponent implements OnInit {
     username: string,
     password: string
   } = {
-    username: '',
-    password: ''
+    username: '', // john
+    password: '' // changeme
   }
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
   }
 
   submit() {
-    alert('asdasd');
+    this.http.post('http://localhost:3000/auth/login', {
+      "username": this.credentials.username,
+      "password": this.credentials.password
+    }).subscribe(console.log);
   }
 
 }
